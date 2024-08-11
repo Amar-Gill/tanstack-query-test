@@ -7,7 +7,7 @@ export type Todo = {
 export type Todos = ReadonlyArray<Todo>
 
 const fetchTodos = async (state: State): Promise<Todos> => {
-  const response = await fetch(`todos/${state}`)
+  const response = await fetch(`/api/todos/${state}`)
   return (await response.json()).todos;
 }
 
