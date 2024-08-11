@@ -6,11 +6,11 @@ export type Todo = {
 }
 export type Todos = ReadonlyArray<Todo>
 
-// const fetchTodos = async (state: State): Promise<Todos> => {
-//   const response = await axios.get(`todos/${state}`)
-//   return response.data
-// }
-//
+const fetchTodos = async (state: State): Promise<Todos> => {
+  const response = await fetch(`todos/${state}`)
+  return (await response.json()).todos;
+}
+
 // export const useTodosQuery = (state: State) =>
 //   useQuery({
 //     queryKey: ['todos', state],
