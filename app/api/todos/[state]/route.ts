@@ -5,6 +5,6 @@ export async function GET(request: Request, { params }: { params: { state: strin
   const state = params.state;
 
   return Response.json({
-    todos: todos.filter((t) => t.state === state)
+    todos: state === 'all' ? todos : todos.filter((t) => t.state === state)
   })
 }
