@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query"
+
 export type State = 'all' | 'open' | 'done'
 export type Todo = {
   id: number
@@ -11,8 +13,8 @@ const fetchTodos = async (state: State): Promise<Todos> => {
   return (await response.json()).todos;
 }
 
-// export const useTodosQuery = (state: State) =>
-//   useQuery({
-//     queryKey: ['todos', state],
-//     queryFn: () => fetchTodos(state),
-//   })
+export const useTodosQuery = (state: State) =>
+  useQuery({
+    queryKey: ['todos', state],
+    queryFn: () => fetchTodos(state),
+  })
