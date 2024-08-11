@@ -11,9 +11,9 @@ export default function Todos() {
     )
   }
 
-  if (status === 'error') {
+  if (error) {
     return (
-      <p>Error</p>
+      <p>{error.message}</p>
     )
   }
 
