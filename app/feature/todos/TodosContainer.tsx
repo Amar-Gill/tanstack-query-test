@@ -1,6 +1,6 @@
 "use client"
 
-import { useTodosQuery } from "./queries";
+import { Todo, useTodosQuery } from "./queries";
 
 export default function TodosContainer() {
   const { data: todos, status, error } = useTodosQuery('done')
@@ -19,8 +19,17 @@ export default function TodosContainer() {
 
   return (
     <div>
-      <p>TODOSSS</p>
-      {todos?.length ? todos.map((t) => t.title) : <p>No Todos</p>}
+      <p>Current Todos</p>
+      {todos?.length ? todos.map((t) => <TodoItem key={t.id} todo={t} />) : <p>No Todos</p>}
     </div>
   );
+}
+
+function TodoItem({ todo }: { todo: Todo }) {
+  return (
+    <div>
+      <h2 className="text-2xl">{todo.title}</h2>
+      <p>state: {todo.state}</p>
+    </div>
+  )
 }
