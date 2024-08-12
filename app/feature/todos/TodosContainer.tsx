@@ -4,9 +4,9 @@ import { useState } from "react";
 import { State, Todo, useTodosQuery } from "./queries";
 
 export default function TodosContainer() {
-  const [todosState, setTodosState] = useState<State>('done');
+  const [todosStateFilter, setTodosStateFilter] = useState<State>('done');
 
-  const { data: todos, status, error } = useTodosQuery(todosState)
+  const { data: todos, status, error } = useTodosQuery(todosStateFilter)
 
   if (status === 'pending') {
     return (
@@ -29,7 +29,7 @@ export default function TodosContainer() {
   return (
     <div>
       <div>
-        <select value={todosState} onChange={(e) => setTodosState(e.target.value)}>
+        <select value={todosStateFilter} onChange={(e) => setTodosStateFilter(e.target.value)}>
           <option value="all">All</option>
           <option value="open">Open</option>
           <option value="done">Done</option>
