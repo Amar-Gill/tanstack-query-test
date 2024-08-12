@@ -1,25 +1,12 @@
 "use client"
 
 import { useState } from "react";
-import { State, Todo, Todos, useTodosQuery } from "./queries";
-import { useQueryClient } from "@tanstack/react-query";
+import { State, Todo, useTodosQuery } from "./queries";
 
 export default function TodosContainer() {
-  const queryClient = useQueryClient();
-
   const [todosState, setTodosState] = useState<State>('done');
 
-  const { data: todos, status, error, refetch } = useTodosQuery(todosState)
-
-  function handleTodosStateChange(newState: State) {
-    setTodosState(newState);
-
-    const dataForNewState = queryClient.getQueryData<Todos>(['todos', newState])
-
-    if (!dataForNewState) {
-      refetch()
-    }
-  }
+  const { data: todos, status, error } = useTodosQuery(todosState)
 
   if (status === 'pending') {
     return (
@@ -42,7 +29,7 @@ export default function TodosContainer() {
   return (
     <div>
       <div>
-        <select value={todosState} onChange={(e) => handleTodosStateChange(e.target.value)}>
+        <select value={todosState} onChange={(e) => setTodosState(e.target.value)}>
           <option value="all">All</option>
           <option value="open">Open</option>
           <option value="done">Done</option>
