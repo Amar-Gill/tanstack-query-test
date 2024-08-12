@@ -17,10 +17,18 @@ export default function TodosContainer() {
     )
   }
 
+  if (!todos.length) {
+    return (
+      <p>No Todos sorry</p>
+    )
+  }
+
   return (
     <div>
-      <p>Current Todos</p>
-      {todos?.length ? todos.map((t) => <TodoItem key={t.id} todo={t} />) : <p>No Todos</p>}
+      <h1 className="text-3xl">Current Todos</h1>
+      <div className="space-y-3">
+        {todos.map((t) => <TodoItem key={t.id} todo={t} />)}
+      </div>
     </div>
   );
 }
